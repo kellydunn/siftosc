@@ -1,0 +1,10 @@
+/home/kelly/.wine/drive_c/Sifteo/Sifteo-SDK-1_1_2/SiftOsc/SiftOsc/bin/Debug/Sifteo.dll
+/home/kelly/.wine/drive_c/Sifteo/Sifteo-SDK-1_1_2/SiftOsc/SiftOsc/bin/Debug/JsonFx.dll
+/home/kelly/.wine/drive_c/Sifteo/Sifteo-SDK-1_1_2/SiftOsc/SiftOsc/bin/Debug/Game.exe.mdb
+/home/kelly/.wine/drive_c/Sifteo/Sifteo-SDK-1_1_2/SiftOsc/SiftOsc/bin/Debug/Game.exe
+/home/kelly/.wine/drive_c/Sifteo/Sifteo-SDK-1_1_2/SiftOsc/SiftOsc/obj/Debug/Game.exe
+/home/kelly/.wine/drive_c/Sifteo/Sifteo-SDK-1_1_2/SiftOsc/SiftOsc/obj/Debug/Game.exe.mdb
+/home/kelly/.wine/drive_c/Sifteo/Sifteo-SDK-1_1_2/SiftOsc/SiftOsc/bin/Debug/Bespoke.Common.dll
+/home/kelly/.wine/drive_c/Sifteo/Sifteo-SDK-1_1_2/SiftOsc/SiftOsc/bin/Debug/Bespoke.Common.Osc.dll
+/home/kelly/.wine/drive_c/Sifteo/Sifteo-SDK-1_1_2/SiftOsc/SiftOsc/bin/Debug/DirectShowLib-2005.dll
+/home/kelly/.wine/drive_c/Sifteo/Sifteo-SDK-1_1_2/SiftOsc/SiftOsc/bin/Debug/MySql.Data.dll

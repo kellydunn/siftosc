@@ -1,26 +1,27 @@
 using Sifteo;
 using System;
+using System.Net;
+using System.IO;
 using Bespoke.Common;
 using Bespoke.Common.Osc;
 
 namespace SiftOsc {
   public class SiftOsc : BaseApp {
+    private OscServer server;
 
     override public int FrameRate {
       get { return 20; }
     }
 
-    // called during intitialization, before the game has started to run
     override public void Setup() {
       Log.Debug("Setup()");
+      server = new OscServer(TransportType.Udp, IPAddress.Loopback, 3333);
     }
 
     override public void Tick() {
       Log.Debug("Tick()");
     }
 
-    // development mode only
-    // start SiftOsc as an executable and run it, waiting for Siftrunner to connect
     static void Main(string[] args) {
       new SiftOsc().Run();
     }

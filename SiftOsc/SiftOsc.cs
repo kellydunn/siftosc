@@ -8,6 +8,8 @@ using Bespoke.Common.Osc;
 namespace SiftOsc {
   public class SiftOsc : BaseApp {
     private OscServer server;
+    private IPAddress address;
+    private int port;
 
     override public int FrameRate {
       get { return 20; }
@@ -16,6 +18,8 @@ namespace SiftOsc {
     override public void Setup() {
       Log.Debug("Setup()");
       server = new OscServer(TransportType.Udp, IPAddress.Loopback, 3333);
+      address = IPAddress.Parse("127.0.0.1");
+      port = 7123;
     }
 
     override public void Tick() {

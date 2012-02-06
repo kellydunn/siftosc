@@ -21,6 +21,7 @@ namespace SiftOsc {
       server = new OscServer(TransportType.Udp, IPAddress.Loopback, 3333, IPAddress.Loopback, Bespoke.Common.Net.TransmissionType.Multicast);
       server.RegisterMethod("sift/tilt");
       server.MessageReceived += new OscMessageReceivedHandler(MessageReceived);
+      server.Start();
 
       address = IPAddress.Parse("127.0.0.1");
       port = 7123;

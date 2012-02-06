@@ -10,7 +10,7 @@ namespace SiftOsc {
   public class SiftOsc : BaseApp {
     private OscServer server;
     private OscClient client;
-    private IPAddress address;
+    private IPEndPoint endPoint;
     private int port;
 
     override public int FrameRate {
@@ -18,15 +18,13 @@ namespace SiftOsc {
     }
 
     override public void Setup() {
-      server = new OscServer(TransportType.Udp, IPAddress.Loopback, 3333, IPAddress.Loopback, Bespoke.Common.Net.TransmissionType.Multicast);
-      server.RegisterMethod("sift/tilt");
+      server = new OscServer(TransportType.Udp, IPAddress.Loopback, 3333);
+      server.RegisterMethod("siftosc/tilt");
       server.MessageReceived += new OscMessageReceivedHandler(MessageReceived);
       server.Start();
 
-      address = IPAddress.Parse("127.0.0.1");
-      port = 7123;
-
-      client = new OscClient(address, port);
+      client = new OscClient(IPAddress.Loopback, 7001);
+      endPoint = new IPEndPoint(IPAddress.Loopback, 3333);
 
       foreach(var cube in this.CubeSet) {
         cube.TiltEvent += OnTilt;
@@ -35,6 +33,10 @@ namespace SiftOsc {
 
     public void OnTilt(Cube c, int x, int y, int z) {
       Log.Debug("x: " + x + " y: " + y + " z:" + z);
+      OscMessage oscMessage = new OscMessage(endPoint, "/siftosc/tilt", client);
+      OscBundle bundle = new OscBundle(endPoint, client);
+      bundle.Append(oscMessage);
+      bundle.Send(endPoint);
     }
 
     static void MessageReceived(object sender, OscMessageReceivedEventArgs e) {

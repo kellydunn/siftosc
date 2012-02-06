@@ -22,6 +22,13 @@ namespace SiftOsc {
       address = IPAddress.Parse("127.0.0.1");
       port = 7123;
       client = new OscClient(address, port);
+      foreach(var cube in this.CubeSet) {
+        cube.TiltEvent += OnTilt;
+      }
+    }
+
+    public void OnTilt(Cube c, int x, int y, int z) {
+      Log.Debug("x: " + x + " y: " + y + " z:" + z);
     }
 
     override public void Tick() {

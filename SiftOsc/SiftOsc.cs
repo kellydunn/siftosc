@@ -20,7 +20,7 @@ namespace SiftOsc {
     override public void Setup() {
       server = new OscServer(TransportType.Udp, IPAddress.Loopback, 3333);
       server.RegisterMethod("siftosc/tilt");
-      server.MessageReceived += new OscMessageReceivedHandler(MessageReceived);
+      server.BundleReceived += new OscBundleReceivedHandler(BundleReceived);
       server.Start();
 
       client = new OscClient(IPAddress.Loopback, 7001);
@@ -39,8 +39,8 @@ namespace SiftOsc {
       bundle.Send(endPoint);
     }
 
-    static void MessageReceived(object sender, OscMessageReceivedEventArgs e) {
-      Log.Debug(string.Format("Message Received [{0}]: {1}", e.Message.SourceEndPoint.Address, e.Message.Address));
+    static void BundleReceived(object sender, OscBundleReceivedEventArgs e) {
+      Log.Debug(string.Format("Message Received [{0}]: {1}", e.Bundle.SourceEndPoint.Address, e.Bundle.Address));
     }
 
     override public void Tick() { }

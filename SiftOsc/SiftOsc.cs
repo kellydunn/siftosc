@@ -8,6 +8,7 @@ using Bespoke.Common.Osc;
 namespace SiftOsc {
   public class SiftOsc : BaseApp {
     private OscServer server;
+    private OscClient client;
     private IPAddress address;
     private int port;
 
@@ -20,6 +21,7 @@ namespace SiftOsc {
       server = new OscServer(TransportType.Udp, IPAddress.Loopback, 3333);
       address = IPAddress.Parse("127.0.0.1");
       port = 7123;
+      client = new OscClient(address, port);
     }
 
     override public void Tick() {

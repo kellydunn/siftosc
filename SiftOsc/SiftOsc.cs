@@ -2,6 +2,7 @@ using Sifteo;
 using System;
 using System.Net;
 using System.IO;
+using System.Drawing;
 using Bespoke.Common;
 using Bespoke.Common.Osc;
 
@@ -17,7 +18,9 @@ namespace SiftOsc {
     }
 
     override public void Setup() {
-      server = new OscServer(TransportType.Udp, IPAddress.Loopback, 3333);
+      server = new OscServer(TransportType.Udp, IPAddress.Loopback, 3333, IPAddress.Loopback, Bespoke.Common.Net.TransmissionType.Multicast);
+      server.RegisterMethod("sift/tilt");
+      server.MessageReceived += new OscMessageReceivedHandler(MessageReceived);
 
       address = IPAddress.Parse("127.0.0.1");
       port = 7123;
@@ -31,6 +34,10 @@ namespace SiftOsc {
 
     public void OnTilt(Cube c, int x, int y, int z) {
       Log.Debug("x: " + x + " y: " + y + " z:" + z);
+    }
+
+    static void MessageReceived(object sender, OscMessageReceivedEventArgs e) {
+      Log.Debug(string.Format("Message Received [{0}]: {1}", e.Message.SourceEndPoint.Address, e.Message.Address));
     }
 
     override public void Tick() { }

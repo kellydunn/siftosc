@@ -17,11 +17,13 @@ namespace SiftOsc {
     }
 
     override public void Setup() {
-      Log.Debug("Setup()");
       server = new OscServer(TransportType.Udp, IPAddress.Loopback, 3333);
+
       address = IPAddress.Parse("127.0.0.1");
       port = 7123;
+
       client = new OscClient(address, port);
+
       foreach(var cube in this.CubeSet) {
         cube.TiltEvent += OnTilt;
       }
@@ -31,9 +33,7 @@ namespace SiftOsc {
       Log.Debug("x: " + x + " y: " + y + " z:" + z);
     }
 
-    override public void Tick() {
-      Log.Debug("Tick()");
-    }
+    override public void Tick() { }
 
     static void Main(string[] args) {
       new SiftOsc().Run();

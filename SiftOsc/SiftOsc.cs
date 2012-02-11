@@ -26,7 +26,8 @@ namespace SiftOsc {
 
       client = new OscClient(IPAddress.Loopback, 7001);
       renoiseAddress = IPAddress.Parse("10.0.2.117");
-      endPoint = new IPEndPoint(renoiseAddress, 9001);
+      // endPoint = new IPEndPoint(renoiseAddress, 9001);
+      endPoint = new IPEndPoint(IPAddress.Loopback, 9001);
 
       foreach(var cube in this.CubeSet) {
         cube.TiltEvent += OnTilt;

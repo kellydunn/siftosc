@@ -8,9 +8,8 @@ using Bespoke.Common.Osc;
 
 namespace SiftOsc {
   public class SiftOsc : BaseApp {
-    private OscServer server;
     private OscClient client;
-    private IPAddress renoiseAddress;
+    private IPEndPoint renoiseEndPoint;
     private IPEndPoint endPoint;
     private int port;
 
@@ -19,38 +18,49 @@ namespace SiftOsc {
     }
 
     override public void Setup() {
-      server = new OscServer(TransportType.Udp, IPAddress.Loopback, 3333);
-      server.RegisterMethod("siftosc/tilt");
-      server.BundleReceived += new OscBundleReceivedHandler(BundleReceived);
-      server.Start();
-
       client = new OscClient(IPAddress.Loopback, 7001);
-      renoiseAddress = IPAddress.Parse("10.0.2.117");
-      // endPoint = new IPEndPoint(renoiseAddress, 9001);
-      endPoint = new IPEndPoint(IPAddress.Loopback, 9001);
 
-      foreach(var cube in this.CubeSet) {
-        cube.TiltEvent += OnTilt;
+      IPAddress ipAddress;
+      bool demoing = true;
+      if(demoing) {
+        ipAddress = IPAddress.Parse("10.0.2.117");
+      } else {
+        ipAddress = IPAddress.Loopback;
+      }
+
+      renoiseEndPoint = new IPEndPoint(ipAddress, 9001);
+      endPoint = new IPEndPoint(ipAddress, 9002);
+
+      this.CubeSet[0].TiltEvent += OnTilt;
+
+      this.CubeSet[1].ShakeStartedEvent += OnShakeStarted;
+
+      this.CubeSet[2].ShakeStoppedEvent += OnShakeStopped;
+      this.CubeSet[2].Image("../assets/dumb.jpg");
+    }
+
+    public void OnShakeStarted(Cube c) {
+      OscMessage oscMessage = new OscMessage(endPoint, "/renoise/transport/start");
+      Log.Debug("" + endPoint.Address);
+      oscMessage.Send(renoiseEndPoint);
+    }
+
+    public void OnShakeStopped(Cube C, int duration) {
+      if(duration > 100) {
+        OscMessage oscMessage = new OscMessage(endPoint, "/renoise/transport/start");
+        Log.Debug("" + endPoint.Address);
+        oscMessage.Send(renoiseEndPoint);
       }
     }
 
     public void OnTilt(Cube c, int x, int y, int z) {
-      OscMessage oscMessage = new OscMessage(endPoint, "/renoise/song/bpm", client);
-      oscMessage.Append("" + (x * 100));
-      OscMessage oscMessage2 = new OscMessage(endPoint, "/renoise/song/edit/octave", client);
-      oscMessage2.Append("" + (y + 2));
-      OscMessage oscMessage3 = new OscMessage(endPoint, "/renoise/song/edit/step", client);
-      oscMessage3.Append("" + (z + 2));
+      OscMessage oscMessage = new OscMessage(endPoint, "/siftosc/tilt", client);
+      oscMessage.Append(x);
+      oscMessage.Append(y);
+      oscMessage.Append(z);
+      Log.Debug("x: " + x + "y: " + y + "z: " + z);
       oscMessage.Send(endPoint);
-      oscMessage2.Send(endPoint);
-      oscMessage3.Send(endPoint);
     }
-
-    static void BundleReceived(object sender, OscBundleReceivedEventArgs e) {
-      Log.Debug(string.Format("Message Received [{0}]: {1}", e.Bundle.SourceEndPoint.Address, e.Bundle.Address));
-    }
-
-    override public void Tick() { }
 
     static void Main(string[] args) {
       new SiftOsc().Run();

@@ -6,7 +6,7 @@
 		"server": "127.0.0.1:7000",
 		"description": "wubwubwubwub",
 		"appModule": "UNUSED",
-		"coverArt": "cover.png",
+		"coverArt": "assets/siftosc.jpg",
 	    "requiredSiftCount" : 3,
 	    "soundsPath": "assets/sounds",
 	    "imagesPath": "assets/images"

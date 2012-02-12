@@ -46,10 +46,14 @@ namespace SiftOsc {
     }
 
     public void OnShakeStopped(Cube C, int duration) {
-      if(duration > 100) {
+      if(duration > 75) {
         OscMessage oscMessage = new OscMessage(endPoint, "/renoise/transport/start");
         Log.Debug("" + endPoint.Address);
         oscMessage.Send(renoiseEndPoint);
+
+        // Potentially the worst hack of all time
+        OscMessage oscMessage2 = new OscMessage(endPoint, "/siftosc/drop", client);
+        oscMessage2.Send(endPoint);
       }
     }
 

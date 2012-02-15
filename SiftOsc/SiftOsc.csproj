@@ -48,6 +48,10 @@
       <SpecificVersion>false</SpecificVersion>
       <HintPath>..\lib\Bespoke.Common.Osc.dll</HintPath>
     </Reference>
+    <Reference Include="Yaml">
+      <SpecificVersion>false</SpecificVersion>
+      <HintPath>..\lib\Yaml.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />

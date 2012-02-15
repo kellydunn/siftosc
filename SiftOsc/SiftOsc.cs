@@ -69,6 +69,7 @@ namespace SiftOsc {
 
     static void Main(string[] args) {
       new SiftOsc().Run();
+      Node node = Node.FromFile("config.yaml");
     }
   }
 }

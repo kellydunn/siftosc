@@ -15,6 +15,7 @@ Requires the following:
 
 - mono
 - xbuild
+- Sifteo SDK + Siftdev (http://developer.sifteo.com)
 
 Dependencies are kept in the `lib` folder, as I'm still learning how C# handles deps management :P
 

@@ -7,13 +7,14 @@
 \/\____/\ \_\ \_\   \ \__\ \____/\/\____/\ \____\
  \/___/  \/_/\/_/    \/__/\/___/  \/___/  \/____/
 ```
-*** what
+# what
 sf music hack day 2012 project.  Allows Sifteo Cubes to send OSC messages to various OSC servers, adding an additional dimension to your musical expression!
 
-*** installation
+# installation
 Requires the following:
-  - mono
-  - xbuild
+
+- mono
+- xbuild
 
 Dependencies are kept in the `lib` folder, as I'm still learning how C# handles deps management :P
 

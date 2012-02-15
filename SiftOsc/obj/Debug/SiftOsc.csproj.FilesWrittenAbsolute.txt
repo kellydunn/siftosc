@@ -18,3 +18,4 @@
 /home/kelly/work/siftosc/SiftOsc/bin/Debug/Game.exe
 /home/kelly/work/siftosc/SiftOsc/obj/Debug/Game.exe
 /home/kelly/work/siftosc/SiftOsc/obj/Debug/Game.exe.mdb
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/Yaml.dll

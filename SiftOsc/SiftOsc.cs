@@ -5,6 +5,7 @@ using System.IO;
 using System.Drawing;
 using Bespoke.Common;
 using Bespoke.Common.Osc;
+using Yaml;
 
 namespace SiftOsc {
   public class SiftOsc : BaseApp {

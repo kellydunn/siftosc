@@ -19,3 +19,5 @@
 /home/kelly/work/siftosc/SiftOsc/obj/Debug/Game.exe
 /home/kelly/work/siftosc/SiftOsc/obj/Debug/Game.exe.mdb
 /home/kelly/work/siftosc/SiftOsc/bin/Debug/Yaml.dll
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/YamlDotNet.RepresentationModel.dll
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/YamlDotNet.Core.dll

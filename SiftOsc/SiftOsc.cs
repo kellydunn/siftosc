@@ -1,11 +1,13 @@
 using Sifteo;
 using System;
+using System.Text;
 using System.Net;
 using System.IO;
+using System.Collections.Generic;
 using System.Drawing;
 using Bespoke.Common;
 using Bespoke.Common.Osc;
-using Yaml;
+using YamlDotNet.RepresentationModel;
 
 namespace SiftOsc {
   public class SiftOsc : BaseApp {
@@ -68,8 +70,8 @@ namespace SiftOsc {
     }
 
     static void Main(string[] args) {
+      StringReader input = new StringReader("");
       new SiftOsc().Run();
-      Node node = Node.FromFile("config.yaml");
     }
   }
 }

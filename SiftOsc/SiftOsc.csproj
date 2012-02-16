@@ -48,9 +48,9 @@
       <SpecificVersion>false</SpecificVersion>
       <HintPath>..\lib\Bespoke.Common.Osc.dll</HintPath>
     </Reference>
-    <Reference Include="Yaml">
+    <Reference Include="YamlDotNet.RepresentationModel">
       <SpecificVersion>false</SpecificVersion>
-      <HintPath>..\lib\Yaml.dll</HintPath>
+      <HintPath>..\lib\YamlDotNet.RepresentationModel.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

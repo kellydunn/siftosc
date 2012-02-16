@@ -48,6 +48,14 @@
       <SpecificVersion>false</SpecificVersion>
       <HintPath>..\lib\Bespoke.Common.Osc.dll</HintPath>
     </Reference>
+    <Reference Include="YamlDotNet.Core">
+      <SpecificVersion>false</SpecificVersion>
+      <HintPath>..\lib\YamlDotNet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="YamlDotNet.Converters">
+      <SpecificVersion>false</SpecificVersion>
+      <HintPath>..\lib\YamlDotNet.Converters.dll</HintPath>
+    </Reference>
     <Reference Include="YamlDotNet.RepresentationModel">
       <SpecificVersion>false</SpecificVersion>
       <HintPath>..\lib\YamlDotNet.RepresentationModel.dll</HintPath>

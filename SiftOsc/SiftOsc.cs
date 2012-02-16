@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using Bespoke.Common;
 using Bespoke.Common.Osc;
+using YamlDotNet.Core;
+using YamlDotNet.Converters;
 using YamlDotNet.RepresentationModel;
 
 namespace SiftOsc {
@@ -70,7 +72,14 @@ namespace SiftOsc {
     }
 
     static void Main(string[] args) {
-      StringReader input = new StringReader("");
+      StreamReader input = new StreamReader("config.yaml");
+      StringReader content = new StringReader(input.ReadToEnd());
+      var yaml = new YamlStream();
+      yaml.Load(content);
+      YamlMappingNode mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
+      foreach (var entry in mapping.Children) {
+        Log.Debug(((YamlScalarNode)entry.Key).Value);
+      }
       new SiftOsc().Run();
     }
   }

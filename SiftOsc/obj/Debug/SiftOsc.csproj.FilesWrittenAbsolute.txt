@@ -21,3 +21,4 @@
 /home/kelly/work/siftosc/SiftOsc/bin/Debug/Yaml.dll
 /home/kelly/work/siftosc/SiftOsc/bin/Debug/YamlDotNet.RepresentationModel.dll
 /home/kelly/work/siftosc/SiftOsc/bin/Debug/YamlDotNet.Core.dll
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/YamlDotNet.Converters.dll

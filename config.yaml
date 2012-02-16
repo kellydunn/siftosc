@@ -1,2 +1,5 @@
-212 :
-    - yeah
+"127.0.0.1:9001" :
+  - renoise/transport/start : OnShakeStarted
+  - renoise/transport/stop[i] : OnShakeStopped
+"127.0.0.1:9002":
+  - siftosc/tilt[iii] : OnTilt

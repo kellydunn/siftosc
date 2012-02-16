@@ -3,6 +3,7 @@ using System;
 using System.Text;
 using System.Net;
 using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using Bespoke.Common;
@@ -17,6 +18,9 @@ namespace SiftOsc {
     private IPEndPoint renoiseEndPoint;
     private IPEndPoint endPoint;
     private int port;
+
+    // TODO implies new classes :3
+    // private Hashtable<String, Array<CubeEvents>> OSCServices
 
     override public int FrameRate {
       get { return 20; }

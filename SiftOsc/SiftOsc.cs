@@ -32,7 +32,7 @@ namespace SiftOsc {
       IPAddress ipAddress;
       bool demoing = true;
       if(demoing) {
-        ipAddress = IPAddress.Parse("10.10.10.199");
+        ipAddress = IPAddress.Parse("10.10.10.189");
       } else {
         ipAddress = IPAddress.Loopback;
       }

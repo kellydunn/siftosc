@@ -13,7 +13,12 @@ using YamlDotNet.Converters;
 using YamlDotNet.RepresentationModel;
 
 namespace SiftOsc {
-  public class SiftOscService {
-    private IPEndPoint endpoint;
+  public class SiftOscCube {
+    private Cube cube;
+
+    // cube has many services
+    private Dictionary<String, List<SiftOscCubeService>> services;
+
+    public SiftOscCube(Cube c, Dictionary<String, List<SiftOscCubeService>> services) {}
   }
 }

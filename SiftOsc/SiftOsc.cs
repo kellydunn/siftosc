@@ -88,7 +88,7 @@ namespace SiftOsc {
       app.oscEndpoints = new Dictionary<String, IPEndPoint>();
       app.oscServices = new Dictionary<String, List<String>>();
 
-      StreamReader input = new StreamReader("config.yaml");
+      StreamReader input = new StreamReader("config.yml");
       StringReader content = new StringReader(input.ReadToEnd());
       var yaml = new YamlStream();
       yaml.Load(content);

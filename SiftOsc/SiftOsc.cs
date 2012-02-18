@@ -19,8 +19,8 @@ namespace SiftOsc {
     private IPEndPoint endPoint;
     private int port;
 
-    // TODO implies new classes :3
-    // private Hashtable<String, Array<CubeEvents>> OSCServices
+    private Dictionary<String, IPEndPoint> oscEndpoints;
+    private Dictionary<String, List<String>> oscServices;
 
     override public int FrameRate {
       get { return 20; }
@@ -75,16 +75,41 @@ namespace SiftOsc {
       oscMessage.Send(endPoint);
     }
 
+    public void setServices(Dictionary<String, List<String>> services) {
+      this.oscServices = services;
+    }
+
+    public void addEndpoint(String address, IPEndPoint endpoint) {
+      this.oscEndpoints.Add(address, endpoint);
+    }
+
     static void Main(string[] args) {
+      SiftOsc app = new SiftOsc();
+      app.oscEndpoints = new Dictionary<String, IPEndPoint>();
+      app.oscServices = new Dictionary<String, List<String>>();
+
       StreamReader input = new StreamReader("config.yaml");
       StringReader content = new StringReader(input.ReadToEnd());
       var yaml = new YamlStream();
       yaml.Load(content);
       YamlMappingNode mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
+
+      Dictionary<String, List<String>> services = new Dictionary<String, List<String>>();
       foreach (var entry in mapping.Children) {
-        Log.Debug(((YamlScalarNode)entry.Key).Value);
+        String service = (((YamlScalarNode)entry.Key).Value);
+        Log.Debug(service);
+
+        String[] serviceData = service.Split(':');
+        IPAddress endpointAddress = IPAddress.Parse(serviceData[0]);
+        IPEndPoint endpoint = new IPEndPoint(endpointAddress, Int32.Parse(serviceData[1]));
+        app.addEndpoint(service, endpoint);
+
+        List<String> callbacks = new List<String>();
+        services.Add(service, callbacks);
       }
-      new SiftOsc().Run();
+
+      app.setServices(services);
+      app.Run();
     }
   }
 }

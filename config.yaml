@@ -1,5 +1,12 @@
-"127.0.0.1:9001" :
-  - renoise/transport/start : OnShakeStarted
-  - renoise/transport/stop[i] : OnShakeStopped
-"127.0.0.1:9002":
-  - siftosc/tilt[iii] : OnTilt
+1:
+  TiltEvent:
+    "127.0.0.1:9002":
+      - siftosc/tilt[iii] : OnTilt
+2:
+  ShakeStartedEvent:
+    "127.0.0.1:9001" :
+      - renoise/transport/start : OnShakeStarted
+3:
+  ShakeStoppedEvent:
+    "127.0.0.1:9001" :
+      - renoise/transport/stop[i] : OnShakeStopped

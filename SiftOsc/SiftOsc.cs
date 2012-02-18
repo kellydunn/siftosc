@@ -98,7 +98,7 @@ namespace SiftOsc {
       foreach (var entry in mapping.Children) {
         String service = (((YamlScalarNode)entry.Key).Value);
         Log.Debug(service);
-
+/*
         String[] serviceData = service.Split(':');
         IPAddress endpointAddress = IPAddress.Parse(serviceData[0]);
         IPEndPoint endpoint = new IPEndPoint(endpointAddress, Int32.Parse(serviceData[1]));
@@ -106,9 +106,10 @@ namespace SiftOsc {
 
         List<String> callbacks = new List<String>();
         services.Add(service, callbacks);
+*/
       }
 
-      app.setServices(services);
+      //app.setServices(services);
       app.Run();
     }
   }

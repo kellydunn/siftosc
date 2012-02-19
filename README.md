@@ -8,7 +8,7 @@
  \/___/  \/_/\/_/    \/__/\/___/  \/___/  \/____/
 ```
 # what
-sf music hack day 2012 project.  Allows Sifteo Cubes to send OSC messages to various OSC servers, adding an additional dimension to your musical expression!
+SF Music Hack Day 2012 project.  Allows Sifteo Cubes to send OSC messages to various OSC servers.
 
 # installation
 Requires the following:
@@ -17,7 +17,9 @@ Requires the following:
 - xbuild
 - Sifteo SDK + Siftdev (http://developer.sifteo.com)
 
-Dependencies are kept in the `lib` folder, as I'm still learning how C# handles deps management :P
+Third Party dependencies are kept in the `lib` folder, as I'm still learning how C# handles deps management :P
+
+# build
 
 ```
 cd siftosc

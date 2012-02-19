@@ -50,8 +50,6 @@ namespace SiftOsc {
       app.setClient(client);
       app.siftOscCubes = new Dictionary<int, SiftOscCube>();
       app.siftOscCallbacks = new Dictionary<SiftOscCube, String>();
-      app.siftOscEndpoints = new Dictionary<String, IPEndPoint>();
-      app.siftOscServices = new Dictionary<String, List<String>>();
 
       StreamReader input = new StreamReader("config.yml");
       StringReader content = new StringReader(input.ReadToEnd());
@@ -62,31 +60,11 @@ namespace SiftOsc {
       yaml.Load(content);
       YamlMappingNode mapping = (YamlMappingNode)yaml.Documents[0].RootNode;
 
-      Dictionary<String, List<String>> services = new Dictionary<String, List<String>>();
-
       foreach (var cubeID in mapping.Children) {
         String cubeIDName = (((YamlScalarNode)cubeID.Key).Value);
-        SiftOscCube cube = new SiftOscCube(null, client);
+        SiftOscCube cube = new SiftOscCube(null, client, null);
         app.addCube(Int32.Parse(cubeIDName), cube);
-
-        YamlMappingNode cubeEvents = (YamlMappingNode)cubeID.Value;
-
-        foreach (var cubeEvent in cubeEvents.Children) {
-          String cubeEventName = (((YamlScalarNode)cubeEvent.Key).Value);
-          Log.Debug(cubeEventName);
-          YamlMappingNode serviceEndpoints = (YamlMappingNode)cubeEvent.Value;
-
-          foreach (var serviceEndpoint in serviceEndpoints.Children) {
-            String serviceEndpointName = (((YamlScalarNode)serviceEndpoint.Key).Value);
-            Log.Debug(serviceEndpointName);
-            YamlSequenceNode messages = (YamlSequenceNode)serviceEndpoint.Value;
-
-            foreach(var message in messages.Children) {
-              String messageName = message.ToString();
-              Log.Debug(messageName);
-            }
-          }
-        }
+        cube.generateFromYaml((YamlMappingNode)cubeID.Value);
       }
 
       app.Run();

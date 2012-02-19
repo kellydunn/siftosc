@@ -65,7 +65,8 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="SiftOsc.cs" />
     <Compile Include="SiftOscCube.cs" />
-    <Compile Include="SiftOscCubeService.cs" />
+    <Compile Include="SiftOscCubeEvent.cs" />
+    <Compile Include="SiftOscEventMessage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

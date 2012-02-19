@@ -16,22 +16,36 @@ namespace SiftOsc {
   public class SiftOscCube {
     private Cube cube;
     private OscClient client;
+    private Dictionary<String, List<IPEndPoint>> cubeEndPoints;
 
-    public SiftOscCube(Cube cube, OscClient client) {
+    public SiftOscCube(Cube cube, OscClient client, Dictionary<String, List<IPEndPoint>> cubeEndPoints) {
       this.cube = cube;
       this.client = client;
+      this.cubeEndPoints = (cubeEndPoints != null)? cubeEndPoints : new Dictionary<String, List<IPEndPoint>>();
     }
 
     public void setCube(Cube c) {
       this.cube = c;
     }
 
-    public void OnButton(Cube c, bool pressed){}
-    public void OnTilt(Cube c, int x, int y, int z){}
-    public void OnShakeStarted(Cube c){}
-    public void OnShakeStopped(Cube C, int duration){}
-    public void OnFlip(Cube c, bool isFacingUp){}
-    public void OnNeighborAdd(Cube c, Cube.Side cSide, Cube neighbor, Cube.Side neighborSide){}
-    public void OnNeighborRemove(Cube c, Cube.Side cSide, Cube neighbor, Cube.Side neighborSide){}
+    public void generateFromYaml(YamlMappingNode cubeEvents) {
+      foreach (var cubeEvent in cubeEvents.Children) {
+        String cubeEventName = (((YamlScalarNode)cubeEvent.Key).Value);
+        Log.Debug("  " + cubeEventName);
+
+        YamlMappingNode eventEndpoints = (YamlMappingNode)cubeEvent.Value;
+
+        List<IPEndPoint> endPoints = new List<IPEndPoint>();
+
+        foreach (var eventEndpoint in eventEndpoints.Children) {
+          SiftOscCubeEvent siftOscCubeEvent = new SiftOscCubeEvent();
+          siftOscCubeEvent.generateFromYaml(eventEndpoint);
+          IPEndPoint endPoint = siftOscCubeEvent.getEndPoint();
+          endPoints.Add(endPoint);
+        }
+
+        cubeEndPoints.Add(cubeEventName, endPoints);
+      }
+    }
   }
 }

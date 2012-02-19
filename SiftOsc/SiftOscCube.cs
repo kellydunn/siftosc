@@ -16,35 +16,67 @@ namespace SiftOsc {
   public class SiftOscCube {
     private Cube cube;
     private OscClient client;
-    private Dictionary<String, List<IPEndPoint>> cubeEndPoints;
+    private Dictionary<String, List<SiftOscCubeEvent>> siftOscCubeEvents;
 
-    public SiftOscCube(Cube cube, OscClient client, Dictionary<String, List<IPEndPoint>> cubeEndPoints) {
+    public SiftOscCube(Cube cube, OscClient client, Dictionary<String, List<SiftOscCubeEvent>> siftOscCubeEvents) {
       this.cube = cube;
       this.client = client;
-      this.cubeEndPoints = (cubeEndPoints != null)? cubeEndPoints : new Dictionary<String, List<IPEndPoint>>();
+      this.siftOscCubeEvents = siftOscCubeEvents;
     }
 
     public void setCube(Cube c) {
       this.cube = c;
     }
 
-    public void generateFromYaml(YamlMappingNode cubeEvents) {
-      foreach (var cubeEvent in cubeEvents.Children) {
+    public void generateFromYaml(YamlMappingNode cubeEventsNode) {
+      foreach (var cubeEvent in cubeEventsNode.Children) {
         String cubeEventName = (((YamlScalarNode)cubeEvent.Key).Value);
         Log.Debug("  " + cubeEventName);
 
         YamlMappingNode eventEndpoints = (YamlMappingNode)cubeEvent.Value;
+        List<SiftOscCubeEvent> cubeEvents = new List<SiftOscCubeEvent>();
 
-        List<IPEndPoint> endPoints = new List<IPEndPoint>();
-
+/*
         foreach (var eventEndpoint in eventEndpoints.Children) {
           SiftOscCubeEvent siftOscCubeEvent = new SiftOscCubeEvent(cube, this.client, null, null);
           siftOscCubeEvent.generateFromYaml(eventEndpoint);
-          IPEndPoint endPoint = siftOscCubeEvent.getEndPoint();
-          endPoints.Add(endPoint);
+          cubeEvents.Add(siftOscCubeEvent);
         }
 
-        cubeEndPoints.Add(cubeEventName, endPoints);
+        this.siftOscCubeEvents.Add(cubeEventName, cubeEvents);
+*/
+      }
+    }
+
+    public void attachEvents() {
+      foreach(KeyValuePair<String, List<SiftOscCubeEvent>> siftOscCubeEvent in this.siftOscCubeEvents) {
+        foreach(SiftOscCubeEvent cubeEvent in siftOscCubeEvent.Value) {
+          foreach(SiftOscEventMessage eventMessage in cubeEvent.getMessages()) {
+            switch(siftOscCubeEvent.Key) {
+              case "ButtonEvent" :
+                this.cube.ButtonEvent += eventMessage.OnButton;
+                break;
+              case "TiltEvent" :
+                this.cube.TiltEvent += eventMessage.OnTilt;
+                break;
+              case "ShakeStartedEvent" :
+                this.cube.ShakeStartedEvent += eventMessage.OnShakeStarted;
+                break;
+              case "ShakeStoppedEvent" :
+                this.cube.ShakeStoppedEvent += eventMessage.OnShakeStopped;
+                break;
+              case "FlipEvent" :
+                this.cube.FlipEvent += eventMessage.OnFlip;
+                break;
+              case "NeighborAddEvent" :
+                this.cube.NeighborAddEvent += eventMessage.OnNeighborAdd;
+                break;
+              case "NeighborRemoveEvent" :
+                this.cube.NeighborRemoveEvent += eventMessage.OnNeighborRemove;
+                break;
+            }
+          }
+        }
       }
     }
   }

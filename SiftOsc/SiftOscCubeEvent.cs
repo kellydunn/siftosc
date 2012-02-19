@@ -48,8 +48,8 @@ namespace SiftOsc {
       return this.endPoint;
     }
 
-    public void attachMessages() {
-      foreach(var message in this.messages) {}
+    public List<SiftOscEventMessage> getMessages() {
+      return this.messages;
     }
   }
 }

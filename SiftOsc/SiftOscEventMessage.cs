@@ -27,7 +27,6 @@ namespace SiftOsc {
 
     public void generateFromYaml(YamlNode endpointMessageNode) {
       this.eventMessage = endpointMessageNode.ToString();
-      Log.Debug("      " + this.eventMessage);
     }
 
     public void OnButton(Cube c, bool pressed){
@@ -41,6 +40,7 @@ namespace SiftOsc {
       message.Append(x);
       message.Append(y);
       message.Append(z);
+      Log.Debug("Spending message to: " + this.server);
       message.Send();
     }
 

@@ -36,9 +36,6 @@ namespace SiftOsc {
     }
 
     public void OnTilt(Cube c, int x, int y, int z){
-      Log.Debug("Spending message : " + this.eventMessage);
-      Log.Debug("Spending message to: " + this.server);
-      Log.Debug("Spending message from: " + this.client);
       OscMessage message = new OscMessage(this.server, this.eventMessage, this.client);
       message.Append(x);
       message.Append(y);

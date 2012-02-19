@@ -33,7 +33,6 @@ namespace SiftOsc {
       String[] data = eventEndpointName.Split(':');
       this.endPoint = new IPEndPoint(IPAddress.Parse(data[0]), Int32.Parse(data[1]));
 
-      Log.Debug("    " + eventEndpointName);
       YamlSequenceNode endpointMessages = (YamlSequenceNode)eventEndpoint.Value;
 
       List<String> messages = new List<String>();

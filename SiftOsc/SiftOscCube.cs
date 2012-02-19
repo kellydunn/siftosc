@@ -31,7 +31,6 @@ namespace SiftOsc {
     public void generateFromYaml(YamlMappingNode cubeEventsNode) {
       foreach (var cubeEvent in cubeEventsNode.Children) {
         String cubeEventName = (((YamlScalarNode)cubeEvent.Key).Value);
-        Log.Debug("  " + cubeEventName);
 
         YamlMappingNode eventEndpoints = (YamlMappingNode)cubeEvent.Value;
         List<SiftOscCubeEvent> cubeEvents = new List<SiftOscCubeEvent>();
@@ -77,5 +76,6 @@ namespace SiftOsc {
         }
       }
     }
+
   }
 }

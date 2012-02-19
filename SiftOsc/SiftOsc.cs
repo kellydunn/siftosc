@@ -21,8 +21,6 @@ namespace SiftOsc {
 
     private Dictionary<int, SiftOscCube> siftOscCubes;
     private Dictionary<SiftOscCube, String> siftOscCallbacks;
-    private Dictionary<String, IPEndPoint> siftOscEndpoints;
-    private Dictionary<String, List<String>> siftOscServices;
 
     override public int FrameRate {
       get { return 20; }
@@ -53,8 +51,6 @@ namespace SiftOsc {
 
       StreamReader input = new StreamReader("config.yml");
       StringReader content = new StringReader(input.ReadToEnd());
-
-      Log.Debug(content.ToString());
 
       var yaml = new YamlStream();
       yaml.Load(content);

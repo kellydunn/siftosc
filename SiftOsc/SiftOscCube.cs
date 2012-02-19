@@ -15,11 +15,15 @@ using YamlDotNet.RepresentationModel;
 namespace SiftOsc {
   public class SiftOscCube {
     private Cube cube;
-    private Dictionary<String, List<SiftOscCubeService>> services;
+    private OscClient client;
 
-    public SiftOscCube(Cube cube, OscClient client, Dictionary<String, List<SiftOscCubeService>> services) {
+    public SiftOscCube(Cube cube, OscClient client) {
       this.cube = cube;
-      this.services = new Dictionary<String, List<SiftOscCubeService>>();
+      this.client = client;
+    }
+
+    public void setCube(Cube c) {
+      this.cube = c;
     }
 
     public void OnButton(Cube c, bool pressed){}

@@ -21,7 +21,7 @@ namespace SiftOsc {
     public SiftOscCube(Cube cube, OscClient client, Dictionary<String, List<SiftOscCubeEvent>> siftOscCubeEvents) {
       this.cube = cube;
       this.client = client;
-      this.siftOscCubeEvents = siftOscCubeEvents;
+      this.siftOscCubeEvents = (siftOscCubeEvents != null)? siftOscCubeEvents : new Dictionary<String, List<SiftOscCubeEvent>>();
     }
 
     public void setCube(Cube c) {
@@ -36,15 +36,15 @@ namespace SiftOsc {
         YamlMappingNode eventEndpoints = (YamlMappingNode)cubeEvent.Value;
         List<SiftOscCubeEvent> cubeEvents = new List<SiftOscCubeEvent>();
 
-/*
+
         foreach (var eventEndpoint in eventEndpoints.Children) {
+
           SiftOscCubeEvent siftOscCubeEvent = new SiftOscCubeEvent(cube, this.client, null, null);
           siftOscCubeEvent.generateFromYaml(eventEndpoint);
           cubeEvents.Add(siftOscCubeEvent);
         }
 
         this.siftOscCubeEvents.Add(cubeEventName, cubeEvents);
-*/
       }
     }
 

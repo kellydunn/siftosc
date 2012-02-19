@@ -14,10 +14,14 @@ using YamlDotNet.RepresentationModel;
 
 namespace SiftOsc {
   public class SiftOscCubeEvent {
+    private Cube cube;
+    private OscClient client;
     private IPEndPoint endPoint;
     private List<SiftOscEventMessage> messages;
 
-    public SiftOscCubeEvent(IPEndPoint endPoint, List<SiftOscEventMessage> messages) {
+    public SiftOscCubeEvent(Cube cube, OscClient client, IPEndPoint endPoint, List<SiftOscEventMessage> messages) {
+      this.cube = cube;
+      this.client = client;
       this.endPoint = endPoint;
       this.messages = messages;
     }
@@ -34,7 +38,7 @@ namespace SiftOsc {
 
       List<String> messages = new List<String>();
       foreach(var endpointMessage in endpointMessages.Children) {
-        SiftOscEventMessage message = new SiftOscEventMessage(null);
+        SiftOscEventMessage message = new SiftOscEventMessage(null, null, endPoint);
         message.generateFromYaml(endpointMessage);
         this.messages.Add(message);
       }
@@ -44,12 +48,8 @@ namespace SiftOsc {
       return this.endPoint;
     }
 
-    public void OnButton(Cube c, bool pressed){}
-    public void OnTilt(Cube c, int x, int y, int z){}
-    public void OnShakeStarted(Cube c){}
-    public void OnShakeStopped(Cube C, int duration){}
-    public void OnFlip(Cube c, bool isFacingUp){}
-    public void OnNeighborAdd(Cube c, Cube.Side cSide, Cube neighbor, Cube.Side neighborSide){}
-    public void OnNeighborRemove(Cube c, Cube.Side cSide, Cube neighbor, Cube.Side neighborSide){}
+    public void attachMessages() {
+      foreach(var message in this.messages) {}
+    }
   }
 }

@@ -1,12 +1,12 @@
 0 :
   TiltEvent :
     "127.0.0.1:9002":
-      - siftosc/tilt[iii]
+      - /siftosc/tilt
 1 :
   ShakeStartedEvent :
     "127.0.0.1:9001" :
-      - renoise/transport/start
+      - /renoise/transport/start
 2 :
   ShakeStoppedEvent :
     "127.0.0.1:9001" :
-      - renoise/transport/stop[i]
+      - /renoise/transport/stop

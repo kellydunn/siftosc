@@ -38,7 +38,7 @@ namespace SiftOsc {
         List<IPEndPoint> endPoints = new List<IPEndPoint>();
 
         foreach (var eventEndpoint in eventEndpoints.Children) {
-          SiftOscCubeEvent siftOscCubeEvent = new SiftOscCubeEvent(null, null);
+          SiftOscCubeEvent siftOscCubeEvent = new SiftOscCubeEvent(cube, this.client, null, null);
           siftOscCubeEvent.generateFromYaml(eventEndpoint);
           IPEndPoint endPoint = siftOscCubeEvent.getEndPoint();
           endPoints.Add(endPoint);

@@ -27,7 +27,7 @@ xbuild
 mono Siftosc/bin/Debug/Game.exe
 ```
 # usage
-SiftOsc is completely controlled via the `config.yml` file located in the root directory of the application.  Simply specify Cube Callback events with corresponding OSC Server endpoints and the desired messages to send to them for the desired effect.
+SiftOsc is completely controlled via the `config.yml` file located in the root directory of the application.  Simply specify Cube Callback events with corresponding OSC Server endpoints and the desired messages to send.
 
 # examples
 

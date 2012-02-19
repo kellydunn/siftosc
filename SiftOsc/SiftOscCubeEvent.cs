@@ -38,7 +38,7 @@ namespace SiftOsc {
 
       List<String> messages = new List<String>();
       foreach(var endpointMessage in endpointMessages.Children) {
-        SiftOscEventMessage message = new SiftOscEventMessage(null, null, endPoint);
+        SiftOscEventMessage message = new SiftOscEventMessage(null, this.client, endPoint);
         message.generateFromYaml(endpointMessage);
         this.messages.Add(message);
       }

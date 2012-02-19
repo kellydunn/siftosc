@@ -30,9 +30,9 @@ namespace SiftOsc {
 
     override public void Setup() {
       endPoint = new IPEndPoint(IPAddress.Loopback, 9002);
-
       for(int i = 0; i < this.CubeSet.toArray().Length; i++) {
         this.siftOscCubes[i].setCube(this.CubeSet[i]);
+        this.siftOscCubes[i].attachEvents();
       }
     }
 

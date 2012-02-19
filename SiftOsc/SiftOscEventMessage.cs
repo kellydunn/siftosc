@@ -15,11 +15,11 @@ using YamlDotNet.RepresentationModel;
 namespace SiftOsc {
   public class SiftOscEventMessage {
     private String eventMessage;
-    private IPEndPoint client;
+    private OscClient client;
     private IPEndPoint server;
     private List<Object> oscMessageParams;
 
-    public SiftOscEventMessage(String message, IPEndPoint client, IPEndPoint server) {
+    public SiftOscEventMessage(String message, OscClient client, IPEndPoint server) {
       this.eventMessage = message;
       this.client = client;
       this.server = server;
@@ -30,35 +30,37 @@ namespace SiftOsc {
     }
 
     public void OnButton(Cube c, bool pressed){
-      OscMessage message = new OscMessage(this.client, this.eventMessage, this.server);
+      OscMessage message = new OscMessage(this.server, this.eventMessage, this.client);
       message.Append(pressed);
       message.Send();
     }
 
     public void OnTilt(Cube c, int x, int y, int z){
-      OscMessage message = new OscMessage(this.client, this.eventMessage, this.server);
+      Log.Debug("Spending message : " + this.eventMessage);
+      Log.Debug("Spending message to: " + this.server);
+      Log.Debug("Spending message from: " + this.client);
+      OscMessage message = new OscMessage(this.server, this.eventMessage, this.client);
       message.Append(x);
       message.Append(y);
       message.Append(z);
-      Log.Debug("Spending message to: " + this.server);
-      message.Send();
+      message.Send(this.server);
     }
 
     public void OnShakeStarted(Cube c){
-      OscMessage message = new OscMessage(this.client, this.eventMessage, this.server);
-      message.Send();
+      OscMessage message = new OscMessage(this.server, this.eventMessage, this.client);
+      message.Send(this.server);
     }
 
     public void OnShakeStopped(Cube C, int duration){
-      OscMessage message = new OscMessage(this.client, this.eventMessage, this.server);
+      OscMessage message = new OscMessage(this.server, this.eventMessage, this.client);
       message.Append(duration);
-      message.Send();
+      message.Send(this.server);
     }
 
     public void OnFlip(Cube c, bool isFacingUp){
-      OscMessage message = new OscMessage(this.client, this.eventMessage, this.server);
+      OscMessage message = new OscMessage(this.server, this.eventMessage, this.client);
       message.Append(isFacingUp);
-      message.Send();
+      message.Send(this.server);
     }
 
     public void OnNeighborAdd(Cube c, Cube.Side cSide, Cube neighbor, Cube.Side neighborSide){}

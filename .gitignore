@@ -1,2 +1,4 @@
 ./SiftOsc/bin/*
+./SiftOsc/bin/**/*
 ./SiftOsc/obj/*
+./SiftOsc/obj/**/*

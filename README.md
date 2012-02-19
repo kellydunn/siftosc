@@ -53,9 +53,9 @@ Consider the following example:
       - /kaoscillator/tilt
 1:
   ShakeStartedEvent:
-    "110.10.10.10" :
+    "110.10.10.10:1337" :
       - /bloopsaphone/shake
-    "110.10.10.11" :
+    "111.11.11.11:1337" :
       - /maracas/shake
 ```
 

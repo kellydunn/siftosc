@@ -28,42 +28,19 @@ namespace SiftOsc {
 
     override public void Setup() {
       client = new OscClient(IPAddress.Loopback, 7001);
+      endPoint = new IPEndPoint(IPAddress.Looback, 9002);
 
-      IPAddress ipAddress;
-      bool demoing = true;
-      if(demoing) {
-        ipAddress = IPAddress.Parse("10.10.10.189");
-      } else {
-        ipAddress = IPAddress.Loopback;
+      for(int i = 0; i < this.CubeSet.toArray().Length; i++) {
+        new SiftOscCube(this.CubeSet[i], client, null);
       }
-
-      renoiseEndPoint = new IPEndPoint(ipAddress, 9001);
-      endPoint = new IPEndPoint(ipAddress, 9002);
-
-      this.CubeSet[0].TiltEvent += OnTilt;
-
-      this.CubeSet[1].ShakeStartedEvent += OnShakeStarted;
-
-      this.CubeSet[2].ShakeStoppedEvent += OnShakeStopped;
-      this.CubeSet[2].Image("../assets/dumb.jpg");
     }
 
     public void OnShakeStarted(Cube c) {
       OscMessage oscMessage = new OscMessage(endPoint, "/renoise/transport/start");
-      Log.Debug("" + endPoint.Address);
-      oscMessage.Send(renoiseEndPoint);
     }
 
     public void OnShakeStopped(Cube C, int duration) {
-      if(duration > 75) {
-        OscMessage oscMessage = new OscMessage(endPoint, "/renoise/transport/start");
-        Log.Debug("" + endPoint.Address);
-        oscMessage.Send(renoiseEndPoint);
-
-        // Potentially the worst hack of all time
-        OscMessage oscMessage2 = new OscMessage(endPoint, "/siftosc/drop", client);
-        oscMessage2.Send(endPoint);
-      }
+      OscMessage oscMessage = new OscMessage(endPoint, "/renoise/transport/start");
     }
 
     public void OnTilt(Cube c, int x, int y, int z) {
@@ -73,14 +50,6 @@ namespace SiftOsc {
       oscMessage.Append(z);
       Log.Debug("x: " + x + "y: " + y + "z: " + z);
       oscMessage.Send(endPoint);
-    }
-
-    public void setServices(Dictionary<String, List<String>> services) {
-      this.oscServices = services;
-    }
-
-    public void addEndpoint(String address, IPEndPoint endpoint) {
-      this.oscEndpoints.Add(address, endpoint);
     }
 
     static void Main(string[] args) {
@@ -98,18 +67,14 @@ namespace SiftOsc {
       foreach (var entry in mapping.Children) {
         String service = (((YamlScalarNode)entry.Key).Value);
         Log.Debug(service);
-/*
         String[] serviceData = service.Split(':');
         IPAddress endpointAddress = IPAddress.Parse(serviceData[0]);
         IPEndPoint endpoint = new IPEndPoint(endpointAddress, Int32.Parse(serviceData[1]));
-        app.addEndpoint(service, endpoint);
 
         List<String> callbacks = new List<String>();
         services.Add(service, callbacks);
-*/
       }
 
-      //app.setServices(services);
       app.Run();
     }
   }

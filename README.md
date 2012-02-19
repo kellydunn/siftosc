@@ -25,12 +25,11 @@ xbuild
 mono Siftosc/bin/Debug/Game.exe
 ```
 # usage
-The end goal is to configure how your sifteo cubes will talk to an OSC server via the config.yaml file found at the root directory of the project.  Ideally, you will have full control over what cube callbacks get associated with which OSC servers, and what messages they send via this configuration file.
+SiftOsc is completely controlled via the `config.yml` file located in the root directory of the application.  Simply specify Cube Callback events with corresponding OSC Server endpoints and the desired messages to send to them for the desired effect.
 
+# examples
 
-# exampls
-
-A sample config.yaml file would look something like this:
+A sample `config.yml` file would look something like this:
 
 ```
 0:
@@ -61,4 +60,5 @@ Consider the following example:
 Here, you can see that it's possible to attach the `TiltEvent` of one cube to many different messages that get sent to the same endpoint `127.0.0.1:9001`.  Which means you can send many messages to one OSC server per cube event.  Additionally, you can send messages to different endpoints for each cube event, as denoted with the `ShakeStartedEvent` configuration listed for cube #1.
 
 Happy hacking (╮^—^)╯ <3<3<3
+
   - Kelly

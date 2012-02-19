@@ -15,12 +15,17 @@ using YamlDotNet.RepresentationModel;
 namespace SiftOsc {
   public class SiftOscCubeEvent {
     private IPEndPoint endPoint;
+    private List<SiftOscEventMessage> messages;
 
-    public SiftOscCubeEvent() {}
+    public SiftOscCubeEvent(IPEndPoint endPoint, List<SiftOscEventMessage> messages) {
+      this.endPoint = endPoint;
+      this.messages = messages;
+    }
 
     public void generateFromYaml(KeyValuePair<YamlNode, YamlNode>eventEndpoint) {
-      String eventEndpointName = (((YamlScalarNode)eventEndpoint.Key).Value);
+      this.messages = new List<SiftOscEventMessage>();
 
+      String eventEndpointName = (((YamlScalarNode)eventEndpoint.Key).Value);
       String[] data = eventEndpointName.Split(':');
       this.endPoint = new IPEndPoint(IPAddress.Parse(data[0]), Int32.Parse(data[1]));
 
@@ -31,6 +36,7 @@ namespace SiftOsc {
       foreach(var endpointMessage in endpointMessages.Children) {
         SiftOscEventMessage message = new SiftOscEventMessage(null);
         message.generateFromYaml(endpointMessage);
+        this.messages.Add(message);
       }
     }
 

@@ -15,6 +15,7 @@ using YamlDotNet.RepresentationModel;
 namespace SiftOsc {
   public class SiftOscEventMessage {
     private String eventMessage;
+    private List<Object> oscMessageParams;
 
     public SiftOscEventMessage(String message) {
       this.eventMessage = (message != null)? message : null;
@@ -23,6 +24,14 @@ namespace SiftOsc {
     public void generateFromYaml(YamlNode endpointMessageNode) {
       this.eventMessage = endpointMessageNode.ToString();
       Log.Debug("      " + this.eventMessage);
+    }
+
+    public void Parse(String message) {
+      String[] data = message.Split('[');
+      String oscParams = data[1];
+      for(int i = 0; i < oscParams.Length; i++) {
+        Log.Debug("        " + oscParams[i]);
+      }
     }
   }
 }

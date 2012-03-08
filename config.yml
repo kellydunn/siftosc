@@ -6,7 +6,12 @@
   ShakeStartedEvent :
     "127.0.0.1:9001" :
       - /renoise/transport/start
+    "127.0.0.1:9000":
+      - /live/play
 2 :
   ShakeStoppedEvent :
     "127.0.0.1:9001" :
       - /renoise/transport/stop
+  ShakeStartedEvent :
+    "127.0.0.1:9000" :
+      - /live/stop

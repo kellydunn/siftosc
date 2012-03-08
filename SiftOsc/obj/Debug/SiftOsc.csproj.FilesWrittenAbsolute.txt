@@ -11,3 +11,7 @@
 /home/kelly/work/siftosc/SiftOsc/bin/Debug/Game.exe
 /home/kelly/work/siftosc/SiftOsc/obj/Debug/Game.exe
 /home/kelly/work/siftosc/SiftOsc/obj/Debug/Game.exe.mdb
+C:\Users\kelly\work\sifteo\siftosc\SiftOsc\bin\Debug\Game.exe.mdb
+C:\Users\kelly\work\sifteo\siftosc\SiftOsc\bin\Debug\Game.exe
+C:\Users\kelly\work\sifteo\siftosc\SiftOsc\obj\Debug\Game.exe
+C:\Users\kelly\work\sifteo\siftosc\SiftOsc\obj\Debug\Game.exe.mdb

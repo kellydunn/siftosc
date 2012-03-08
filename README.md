@@ -10,11 +10,12 @@
 # what
 SF Music Hack Day 2012 project.  Allows Sifteo Cubes to send OSC messages to various OSC servers.
 
+Implementations have included manipulating monomes, renoise, and even ableton live 8 with the addition of LiveOSC.
+
 # installation
 Requires the following:
 
-- mono
-- xbuild
+- mono (http://www.go-mono.com/mono-downloads/download.html)
 - Sifteo SDK + Siftdev (http://developer.sifteo.com)
 
 Third Party dependencies are kept in the `lib` folder, as I'm still learning how C# handles deps management :P
@@ -51,10 +52,12 @@ Consider the following example:
       - /renoise/tilt
       - /monome/tilt
       - /kaoscillator/tilt
+      - /live/play
 1:
   ShakeStartedEvent:
     "110.10.10.10:1337" :
       - /bloopsaphone/shake
+      - /live/stop
     "111.11.11.11:1337" :
       - /maracas/shake
 ```

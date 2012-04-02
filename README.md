@@ -22,10 +22,12 @@ Third Party dependencies are kept in the `lib` folder, as I'm still learning how
 
 # build
 
+Dependencies are currenly set relative to the root path of the project.  The mono runtime comes packaged with `xbuild`, which is radtastic for all your compiling needs.  Binaries currently are dumped in `SiftOsc/bin/Debug/`
+
 ```
 cd siftosc
 xbuild
-mono Siftosc/bin/Debug/Game.exe
+mono SiftOsc/bin/Debug/Game.exe
 ```
 # usage
 SiftOsc is completely controlled via the `config.yml` file located in the root directory of the application.  Simply specify Cube Callback events with corresponding OSC Server endpoints and the desired messages to send.

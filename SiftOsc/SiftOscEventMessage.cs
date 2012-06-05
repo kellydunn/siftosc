@@ -55,7 +55,15 @@ namespace SiftOsc {
 
     public void OnButton(Cube c, bool pressed){
       OscMessage message = new OscMessage(this.server, this.eventMessage, this.client);
-      message.Append(pressed);
+
+      // TODO instance specific?
+      //      Just clear out after each request?  Seems slow :\
+      Dictionary<string, Object[]> dataTypeRequests = new Dictionary<string, Object[]>();
+      Object[] x = new Object[1];
+      x[0] = pressed;
+
+      dataTypeRequests.Add("b", x);
+      delegateMessage(message, dataTypeRequests);
       message.Send();
     }
 

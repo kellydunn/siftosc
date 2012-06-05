@@ -21,12 +21,14 @@ namespace SiftOsc {
     private List<Object> oscMessageParams;
 
     private Dictionary<string, int> dataTypeCounts;
+    private Dictionary<string, Object[]> dataTypeRequests;
 
     public SiftOscEventMessage(String message, OscClient client, IPEndPoint server) {
       this.eventMessage = message;
       this.client = client;
       this.server = server;
       this.dataTypeCounts = new Dictionary<string, int>();
+      this.dataTypeRequests = new Dictionary<string, Object[]>();
     }
 
     public void generateFromYaml(YamlNode endpointMessageNode) {
@@ -51,28 +53,31 @@ namespace SiftOsc {
           message.Append(dataTypeRequestCollection.Value[i]);
         }
       }
+      message.Send(this.server);
     }
 
     public void OnButton(Cube c, bool pressed){
       OscMessage message = new OscMessage(this.server, this.eventMessage, this.client);
 
-      // TODO instance specific?
-      //      Just clear out after each request?  Seems slow :\
-      Dictionary<string, Object[]> dataTypeRequests = new Dictionary<string, Object[]>();
-      Object[] x = new Object[1];
-      x[0] = pressed;
+      // TODO Refactor
+      List<Object> data = new List<Object>();
+      data.Add(pressed);
 
-      dataTypeRequests.Add("b", x);
-      delegateMessage(message, dataTypeRequests);
-      message.Send();
+      this.dataTypeRequests.Add("b", data.ToArray());
+      delegateMessage(message, this.dataTypeRequests);
     }
 
     public void OnTilt(Cube c, int x, int y, int z){
       OscMessage message = new OscMessage(this.server, this.eventMessage, this.client);
-      message.Append(x);
-      message.Append(y);
-      message.Append(z);
-      message.Send(this.server);
+
+      // TODO Refactor
+      List<Object> data = new List<Object>();
+      data.Add(x);
+      data.Add(y);
+      data.Add(z);
+
+      this.dataTypeRequests.Add("i", data.ToArray());
+      delegateMessage(message, this.dataTypeRequests);
     }
 
     public void OnShakeStarted(Cube c){
@@ -82,14 +87,24 @@ namespace SiftOsc {
 
     public void OnShakeStopped(Cube C, int duration){
       OscMessage message = new OscMessage(this.server, this.eventMessage, this.client);
-      message.Append(duration);
-      message.Send(this.server);
+
+      // TODO Refactor
+      List<Object> data = new List<Object>();
+      data.Add(duration);
+
+      this.dataTypeRequests.Add("i", data.ToArray());
+      delegateMessage(message, this.dataTypeRequests);
     }
 
     public void OnFlip(Cube c, bool isFacingUp){
       OscMessage message = new OscMessage(this.server, this.eventMessage, this.client);
-      message.Append(isFacingUp);
-      message.Send(this.server);
+
+      // TODO Refactor
+      List<Object> data = new List<Object>();
+      data.Add(isFacingUp);
+
+      this.dataTypeRequests.Add("b", data.ToArray());
+      delegateMessage(message, this.dataTypeRequests);
     }
 
     public void OnNeighborAdd(Cube c, Cube.Side cSide, Cube neighbor, Cube.Side neighborSide){}

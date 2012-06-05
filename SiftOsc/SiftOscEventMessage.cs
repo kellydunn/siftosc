@@ -36,12 +36,19 @@ namespace SiftOsc {
         string requests = match.Groups[1].Value;
         foreach(char c in requests) {
           string id = "" + c;
-          Log.Debug(id);
           if(!this.dataTypeCounts.ContainsKey(id)) {
             this.dataTypeCounts.Add(id, 1);
           } else {
             this.dataTypeCounts[id]++;
           }
+        }
+      }
+    }
+
+    public void delegateMessage(OscMessage message, Dictionary<string, Object[]> dataTypeRequests) {
+      foreach(KeyValuePair<string, Object[]> dataTypeRequestCollection in dataTypeRequests) {
+        for(int i = 0; i < this.dataTypeCounts[dataTypeRequestCollection.Key]; i++) {
+          message.Append(dataTypeRequestCollection.Value[i]);
         }
       }
     }

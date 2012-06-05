@@ -1,6 +1,7 @@
 using Sifteo;
 using System;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Net;
 using System.IO;
 using System.Collections;
@@ -27,6 +28,10 @@ namespace SiftOsc {
 
     public void generateFromYaml(YamlNode endpointMessageNode) {
       this.eventMessage = endpointMessageNode.ToString();
+      Match match = Regex.Match(this.eventMessage, @"\[(.*?)\]");
+      if(match.Success) {
+        Log.Debug(match.Groups[1].Value);
+      }
     }
 
     public void OnButton(Cube c, bool pressed){

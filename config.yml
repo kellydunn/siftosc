@@ -1,7 +1,7 @@
 0 :
   TiltEvent :
     "127.0.0.1:9002":
-      - /siftosc/tilt
+      - /siftosc/tilt[iii]
 1 :
   ShakeStartedEvent :
     "127.0.0.1:9001" :

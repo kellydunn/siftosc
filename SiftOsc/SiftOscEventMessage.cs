@@ -20,17 +20,29 @@ namespace SiftOsc {
     private IPEndPoint server;
     private List<Object> oscMessageParams;
 
+    private Dictionary<string, int> dataTypeCounts;
+
     public SiftOscEventMessage(String message, OscClient client, IPEndPoint server) {
       this.eventMessage = message;
       this.client = client;
       this.server = server;
+      this.dataTypeCounts = new Dictionary<string, int>();
     }
 
     public void generateFromYaml(YamlNode endpointMessageNode) {
       this.eventMessage = endpointMessageNode.ToString();
       Match match = Regex.Match(this.eventMessage, @"\[(.*?)\]");
       if(match.Success) {
-        Log.Debug(match.Groups[1].Value);
+        string requests = match.Groups[1].Value;
+        foreach(char c in requests) {
+          string id = "" + c;
+          Log.Debug(id);
+          if(!this.dataTypeCounts.ContainsKey(id)) {
+            this.dataTypeCounts.Add(id, 1);
+          } else {
+            this.dataTypeCounts[id]++;
+          }
+        }
       }
     }
 

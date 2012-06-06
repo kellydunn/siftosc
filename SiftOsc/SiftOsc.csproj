@@ -38,7 +38,6 @@
     </Reference>
     <Reference Include="Sifteo, Version=0.1.4259.19161, Culture=neutral, PublicKeyToken=0e958af9dbfb2cb7">
       <SpecificVersion>False</SpecificVersion>
-      <!--<HintPath>\home\kelly\.wine\drive_c\Sifteo\Sifteo-SDK-1_1_2\bin\Runtimes\mono\Current\sifteo\Sifteo.dll</HintPath>-->
       <HintPath>..\lib\Sifteo.dll</HintPath>
     </Reference>
     <Reference Include="Bespoke.Common">

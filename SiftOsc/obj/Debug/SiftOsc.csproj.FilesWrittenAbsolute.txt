@@ -1,0 +1,13 @@
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/Sifteo.dll
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/Bespoke.Common.dll
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/Bespoke.Common.Osc.dll
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/YamlDotNet.Core.dll
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/YamlDotNet.Converters.dll
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/YamlDotNet.RepresentationModel.dll
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/JsonFx.dll
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/DirectShowLib-2005.dll
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/MySql.Data.dll
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/Game.exe.mdb
+/home/kelly/work/siftosc/SiftOsc/bin/Debug/Game.exe
+/home/kelly/work/siftosc/SiftOsc/obj/Debug/Game.exe
+/home/kelly/work/siftosc/SiftOsc/obj/Debug/Game.exe.mdb

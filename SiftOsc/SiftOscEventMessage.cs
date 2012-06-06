@@ -53,6 +53,7 @@ namespace SiftOsc {
           message.Append(dataTypeRequestCollection.Value[i]);
         }
       }
+      Log.Debug(message.ToString());
       message.Send(this.server);
     }
 

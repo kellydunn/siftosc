@@ -57,6 +57,14 @@ namespace SiftOsc {
       message.Send(this.server);
     }
 
+    public void SetDataTypeRequests(String key, List<Object> data) {
+      if(!this.dataTypeRequests.ContainsKey(key)) {
+        this.dataTypeRequests.Add(key, data.ToArray());
+      } else {
+        this.dataTypeRequests[key] = data.ToArray();
+      }
+    }
+
     public void OnButton(Cube c, bool pressed){
       OscMessage message = new OscMessage(this.server, this.eventMessage, this.client);
 
@@ -64,7 +72,7 @@ namespace SiftOsc {
       List<Object> data = new List<Object>();
       data.Add(pressed);
 
-      this.dataTypeRequests.Add("b", data.ToArray());
+      this.SetDataTypeRequests("b", data);
       delegateMessage(message, this.dataTypeRequests);
     }
 
@@ -77,7 +85,7 @@ namespace SiftOsc {
       data.Add(y);
       data.Add(z);
 
-      this.dataTypeRequests.Add("i", data.ToArray());
+      this.SetDataTypeRequests("i", data);
       delegateMessage(message, this.dataTypeRequests);
     }
 
@@ -93,7 +101,7 @@ namespace SiftOsc {
       List<Object> data = new List<Object>();
       data.Add(duration);
 
-      this.dataTypeRequests.Add("i", data.ToArray());
+      this.SetDataTypeRequests("i", data);
       delegateMessage(message, this.dataTypeRequests);
     }
 
@@ -104,7 +112,7 @@ namespace SiftOsc {
       List<Object> data = new List<Object>();
       data.Add(isFacingUp);
 
-      this.dataTypeRequests.Add("b", data.ToArray());
+      this.SetDataTypeRequests("b", data);
       delegateMessage(message, this.dataTypeRequests);
     }
 
